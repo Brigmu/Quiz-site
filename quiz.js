@@ -1,6 +1,10 @@
 
 let timer = 5;
 let gameTimer = 60;
+let currentQuestion = 0;
+let score = 0;
+let correctAnswer;
+
 
 const timerEl = document.createElement('div');
 
@@ -13,6 +17,9 @@ window.onload = function() {
         timerEl.style.fontWeight = 'bold'
         questionDivEl.appendChild(timerEl);
         timer --;
+        // if (timer === 0) {
+        //     startGame();
+        // }
         if (timer === -1) {
             clearInterval(countdown);
             questionDivEl.removeChild(timerEl);
@@ -26,5 +33,85 @@ window.onload = function() {
     let gameTime = window.setInterval(function() {
         gameTimerEl.textContent = gameTimer;
         gameTimer --;
+        scoreEl.textContent = score;
+        if (gameTimer <= -1) {
+            clearInterval(gameTimer);
+        }
     }, 1000)
- }
+    correctAnswer = getNextQuestion(questions);
+    answer1El.addEventListener('click', function (){
+        let userAnswer = answer1El.textContent;
+        checkIfCorrect(correctAnswer, userAnswer);
+    });
+    answer2El.addEventListener('click', function (){
+        let userAnswer = answer2El.textContent;
+        checkIfCorrect(correctAnswer, userAnswer);
+    });
+    answer3El.addEventListener('click', function (){
+        let userAnswer = answer3El.textContent;
+        checkIfCorrect(correctAnswer, userAnswer);
+    });
+    answer4El.addEventListener('click', function (){
+        let userAnswer = answer4El.textContent;
+        checkIfCorrect(correctAnswer, userAnswer);
+    });
+ };
+
+ function getNextQuestion(arrObj) {
+     let questionObj = arrObj[currentQuestion];
+     let question = questionObj['question'];
+     let choices = questionObj['choices'];
+     let correctAnswer = questionObj['answer'];
+     questionObj['used'] = true;
+     let answer1 = choices[0];
+     let answer2 = choices[1];
+     let answer3 = choices[2];
+     let answer4 = choices[3];
+     questionEl.textContent = question;
+     answer1El.textContent = answer1;
+     answer2El.textContent = answer2;
+     answer3El.textContent = answer3;
+     answer4El.textContent = answer4;
+     currentQuestion ++;    
+
+     return correctAnswer;
+ };
+
+ function checkIfCorrect(answer, clicked) {
+    console.log(correctAnswer);
+     if (answer === clicked) {
+        score += 10;
+        if (currentQuestion === questions.length) {
+            window.location.href = 'index.html';
+         }
+        correctAnswer = getNextQuestion(questions);
+        // listeners();
+     }
+     if (answer !== clicked) {
+         gameTimer -= 10;
+         if (currentQuestion === questions.length) {
+            window.location.href = 'index.html';
+         }
+         correctAnswer = getNextQuestion(questions);
+        //  listeners(correctAnswer);
+     }
+ };
+
+//  function listeners(correctAnswer) {
+//     answer1El.addEventListener('click', function (correctAnswer){
+//         let userAnswer = answer1El.textContent;
+//         checkIfCorrect(correctAnswer, userAnswer);
+//     });
+//     answer2El.addEventListener('click', function (correctAnswer){
+//         let userAnswer = answer2El.textContent;
+//         checkIfCorrect(correctAnswer, userAnswer);
+//     });
+//     answer3El.addEventListener('click', function (correctAnswer){
+//         let userAnswer = answer3El.textContent;
+//         checkIfCorrect(correctAnswer, userAnswer);
+//     });
+//     answer4El.addEventListener('click', function (correctAnswer){
+//         let userAnswer = answer4El.textContent;
+//         checkIfCorrect(correctAnswer, userAnswer);
+//     });
+//  }

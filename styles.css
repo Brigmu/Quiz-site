@@ -104,4 +104,11 @@ span {
     justify-content: center;
     padding: 5px;
     margin-left: 5px;
+    font-weight: bold;
+}
+
+@media screen and (max-width:650px) {
+    .container {
+        min-width: 350px;
+        /* width: 15%; */
 }

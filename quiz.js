@@ -36,10 +36,15 @@ window.onload = function() {
         gameTimer --;
         scoreEl.textContent = score;
         if (gameTimer <= -1) {
-            clearInterval(gameTimer);
+            clearInterval(gameTime);
+            finalScore = parseInt(score);
+            savedFinalScore = window.localStorage.setItem("finalscore", JSON.stringify(finalScore)); 
+            window.location.href = 'endscreen.html';
         }
     }, 1000)
-    correctAnswer = getNextQuestion(questions);
+    filteredQuestions = questions.filter(item => Object.values(item)[3]);
+    console.log(filteredQuestions);
+    correctAnswer = getNextQuestion(filteredQuestions);
 
     btnsEl.style.visibility = 'visible';
 
@@ -62,11 +67,12 @@ window.onload = function() {
  };
 
  function getNextQuestion(arrObj) {
-     let questionObj = arrObj[currentQuestion];
+     let randomQuestion = Math.floor((Math.random() * filteredQuestions.length));
+     let questionObj = arrObj[randomQuestion];
      let question = questionObj['question'];
      let choices = questionObj['choices'];
      let correctAnswer = questionObj['answer'];
-     questionObj['used'] = true;
+     questionObj['unused'] = false;
      let answer1 = choices[0];
      let answer2 = choices[1];
      let answer3 = choices[2];
@@ -77,14 +83,24 @@ window.onload = function() {
      answer3El.textContent = answer3;
      answer4El.textContent = answer4;
      currentQuestion ++;    
+     filteredQuestions = questions.filter(item => Object.values(item)[3]);
+    console.log(filteredQuestions);
 
      return correctAnswer;
  };
 
  function checkIfCorrect(answer, clicked) {
     console.log(correctAnswer);
+    answeredTimer = gameTimer;
+    console.log(answeredTimer);
+    let timeToAnswer = startOfQuestionTimer - answeredTimer;
+    console.log(timeToAnswer);
+    if (timeToAnswer === 0) {
+        timeToAnswer = 1;
+    };
      if (answer === clicked) {
-        score += 10;
+        score += (5 + Math.ceil((30/timeToAnswer)));
+        feedbackEl.textContent = 'Correct!';
         if (currentQuestion === questions.length) {
             window.location.href = 'endscreen.html';
             // finalscore = score;
@@ -92,35 +108,23 @@ window.onload = function() {
             finalScore = parseInt(score);
             savedFinalScore = window.localStorage.setItem("finalscore", JSON.stringify(finalScore));            
          }
-        correctAnswer = getNextQuestion(questions);
+        correctAnswer = getNextQuestion(filteredQuestions);
+        startOfQuestionTimer = gameTimer;
         // listeners();
      }
      if (answer !== clicked) {
          gameTimer -= 10;
+         feedbackEl.textContent = 'Incorrect!';
          if (currentQuestion === questions.length) {
             window.location.href = 'index.html';
             finalscore = parseInt(score);
+            savedFinalScore = window.localStorage.setItem("finalscore", JSON.stringify(finalScore));  
          }
-         correctAnswer = getNextQuestion(questions);
+         correctAnswer = getNextQuestion(filteredQuestions);
         //  listeners(correctAnswer);
      }
  };
 
-//  function listeners(correctAnswer) {
-//     answer1El.addEventListener('click', function (correctAnswer){
-//         let userAnswer = answer1El.textContent;
-//         checkIfCorrect(correctAnswer, userAnswer);
-//     });
-//     answer2El.addEventListener('click', function (correctAnswer){
-//         let userAnswer = answer2El.textContent;
-//         checkIfCorrect(correctAnswer, userAnswer);
-//     });
-//     answer3El.addEventListener('click', function (correctAnswer){
-//         let userAnswer = answer3El.textContent;
-//         checkIfCorrect(correctAnswer, userAnswer);
-//     });
-//     answer4El.addEventListener('click', function (correctAnswer){
-//         let userAnswer = answer4El.textContent;
-//         checkIfCorrect(correctAnswer, userAnswer);
-//     });
-//  }
+function filterArray(arr) {
+    arr.unused
+}

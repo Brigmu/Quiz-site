@@ -24,6 +24,7 @@ const hs10El = document.querySelector('#hs10');
 const returnButtonEl = document.querySelector('#return-btn');
 const finalScoreEl = document.querySelector('#final-score');
 const highScoresEl = document.querySelector('#high-scores');
+const feedbackEl = document.querySelector('#click-feedback');
 
 let finalscore;
 let score = 0;
@@ -37,6 +38,9 @@ if (highscores.length >= 1) {
     highestScore = highscores[0].score;
 }
 let storedHighScores;
+let answeredTimer = 60;
+let startOfQuestionTimer = 60;
+let filteredQuestions = [];
 
 
 // window.localStorage.setItem('score1', JSON.stringify(store1));
@@ -49,48 +53,48 @@ let questions = [
         question: 'What must you have at the end of lines in js?',
         choices: ['Colon  : ' , 'Exclamation Point  ! ', 'Semi-colon  ;  ', 'Period  .  '],
         answer: 'Semi-colon  ;  ',
-        used: false
+        unused: true
     }
     ,
     {
         question: 'Which of the following is NOT a valid variable?',
         choices: ['  let  ', '  const  ', '  name  ', '  var  '],
         answer: '  name  ',
-        used: false
+        unused: true
     }
     ,
     {
         question: 'Which data type is used if something is true or false?',
         choices: ['  string  ', '  boolean  ', '  function  ', '  number  '],
         answer: '  boolean  ',
-        used: false
+        unused: true
     }
     ,
     {
         question: 'Which of the following is a conditional?',
         choices: ['  function  ', '  variable  ', '  for  ',  '  if  '],
         answer: '  if  ',
-        used: false
+        unused: true
     }
     ,
     {
         question: 'How do you add an element to your page with javascript?',
         choices: ['  append()  ',  '  addelement()  ', '  create()  ',  '  depend()  '],
         answer: '  append()  ',
-        used: false
+        unused: true
     }
     ,
     {
         question: 'What a function does is enclosed in: ',
         choices: ['Parenthesis  ()  ', 'Curly braces  {}  ',  'Square brackets  []  ', 'Backslashes  //  '],
         answer: 'Curly braces  {}  ',
-        used: false
+        unused: true
     }
     ,
     {
         question: 'To use a function youve created you must: ',
         choices: ['  Copy it  ',  '  Hope and pray  ',  '  Add it  ',  '  Call it  '],
         answer: '  Call it  ',
-        used: false
+        unused: true
     }
 ]

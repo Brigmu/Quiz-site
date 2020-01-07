@@ -7,23 +7,31 @@ console.log(finalscore);
 finalscore = JSON.parse(window.localStorage.getItem("finalscore"));
 
 submitBtnEl.addEventListener('click', function(){
-    event.preventDefault();
     newHSName = saveNameEl.value;
-    highscore['name'] = newHSName;
-    highscore['score'] = finalscore;
-    highscores.push(highscore);
-    highscores.sort(compareScore);
-    console.log(highscores);
-    if (highscores.length > 10) {
-        highscores.splice(10, (highscores.length - 9));
+    if (newHSName === '') {
+        // alert('enter a valid name( 1-3 characters');
     }
-    // store1 = highscore;
-    // store1 = storeScore(highscore);
-    // console.log(stored1);
-    storedHighScores = window.localStorage.setItem('highscores', JSON.stringify(highscores))
-    // store1 = window.localStorage.setItem("score1", JSON.stringify(highscore));
-    window.location.href = 'highscores.html';
+    else {
+        event.preventDefault();
+        newHSName = saveNameEl.value;
+        highscore['name'] = newHSName;
+        highscore['score'] = finalscore;
+        highscores.push(highscore);
+        highscores.sort(compareScore);
+        console.log(highscores);
+        if (highscores.length > 10) {
+            highscores.splice(10, (highscores.length - 9));
+        }
+        // store1 = highscore;
+        // store1 = storeScore(highscore);
+        // console.log(stored1);
+        storedHighScores = window.localStorage.setItem('highscores', JSON.stringify(highscores))
+        // store1 = window.localStorage.setItem("score1", JSON.stringify(highscore));
+        window.location.href = 'highscores.html';
+    }
 });
+
+highScoreEndscreenEl.textContent = highestScore
 
 finalScoreEl.textContent = finalscore;
 

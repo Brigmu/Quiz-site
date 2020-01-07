@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url(images/circle-blues.png);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class = 'wrapper'>
+            <div class = 'wrapper-inline'>
+                <h4>High Score</h4>
+                <span id = 'high-score-endscreen'>
+                    test
+                </span>
+            </div>
+            <div class = 'wrapper-inline'>
+                <h4>Final Score</h4>
+                <span id = 'final-score'>
+                    test
+                </span>
+            </div>
+        </div>
+        <div class="wrapper-centered">
+            <h3>Game Over</h3>
+            <p>Enter your initials to save your score.</p>
+            <form>
+                <input type = 'text' id = 'save-name' required maxlength="3">
+                <input type = 'submit' id = 'submit-btn'>
+            </form>
+        </div>
+    </div>
+    
+    <script src = 'main.js'></script>
+    <script src = 'endscreen.js'></script>
+</body>
+</html>

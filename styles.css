@@ -46,9 +46,17 @@ body {
     min-width: 50%;
 }
 
+.wrapper-start-full {
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+}
+
+
 .wrapper-inline {
     display: inline-flex;
-    min-width: 100%;
+    min-width: 50%;
 }
 
 #question {
@@ -83,4 +91,17 @@ body {
     background: indigo;
     width: 10%;
     height: 50px;
+}
+
+.btns {
+    visibility: hidden;
+}
+
+span {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    margin-left: 5px;
 }

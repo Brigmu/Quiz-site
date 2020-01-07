@@ -6,7 +6,42 @@ const questionDivEl = document.querySelector('.question');
 const gameTimerEl = document.querySelector('#timer');
 const questionEl = document.querySelector('#question');
 const scoreEl = document.querySelector('#score');
+const btnsEl = document.querySelector('.btns');
+const highScoreIndexEl = document.querySelector('#high-score-index');
+const highScoreEndscreenEl = document.querySelector('#high-score-endscreen');
+const saveNameEl = document.querySelector('#save-name');
+const submitBtnEl = document.querySelector('#submit-btn');
+const hs1El = document.querySelector('#hs1');
+const hs2El = document.querySelector('#hs2');
+const hs3El = document.querySelector('#hs3');
+const hs4El = document.querySelector('#hs4');
+const hs5El = document.querySelector('#hs5');
+const hs6El = document.querySelector('#hs6');
+const hs7El = document.querySelector('#hs7');
+const hs8El = document.querySelector('#hs8');
+const hs9El = document.querySelector('#hs9');
+const hs10El = document.querySelector('#hs10');
+const returnButtonEl = document.querySelector('#return-btn');
+const finalScoreEl = document.querySelector('#final-score');
+const highScoresEl = document.querySelector('#high-scores');
 
+let finalscore;
+let score = 0;
+let highscore = {};
+let highscores = JSON.parse(window.localStorage.getItem('highscores'));
+if (highscores == null) {
+    highscores = [];
+}
+let highestScore = 0;
+if (highscores.length >= 1) {
+    highestScore = highscores[0].score;
+}
+let storedHighScores;
+
+
+// window.localStorage.setItem('score1', JSON.stringify(store1));
+
+// stored1 = window.localStorage.getItem(JSON.parse(store1));
 
 
 let questions = [

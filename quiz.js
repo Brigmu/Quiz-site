@@ -2,8 +2,9 @@
 let timer = 5;
 let gameTimer = 60;
 let currentQuestion = 0;
-let score = 0;
 let correctAnswer;
+score = 0;
+
 
 
 const timerEl = document.createElement('div');
@@ -39,6 +40,9 @@ window.onload = function() {
         }
     }, 1000)
     correctAnswer = getNextQuestion(questions);
+
+    btnsEl.style.visibility = 'visible';
+
     answer1El.addEventListener('click', function (){
         let userAnswer = answer1El.textContent;
         checkIfCorrect(correctAnswer, userAnswer);
@@ -82,7 +86,11 @@ window.onload = function() {
      if (answer === clicked) {
         score += 10;
         if (currentQuestion === questions.length) {
-            window.location.href = 'index.html';
+            window.location.href = 'endscreen.html';
+            // finalscore = score;
+            // console.log(finalScore);
+            finalScore = parseInt(score);
+            savedFinalScore = window.localStorage.setItem("finalscore", JSON.stringify(finalScore));            
          }
         correctAnswer = getNextQuestion(questions);
         // listeners();
@@ -91,6 +99,7 @@ window.onload = function() {
          gameTimer -= 10;
          if (currentQuestion === questions.length) {
             window.location.href = 'index.html';
+            finalscore = parseInt(score);
          }
          correctAnswer = getNextQuestion(questions);
         //  listeners(correctAnswer);

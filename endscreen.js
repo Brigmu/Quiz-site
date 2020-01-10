@@ -1,11 +1,14 @@
 // highScoreEndscreenEl.textContent = highscore;
 let newHSName;
 
-console.log(score);
-console.log(finalscore);
+// console.log(score);
+// console.log(finalscore);
 
+//gets the final score from the quiz page
 finalscore = JSON.parse(window.localStorage.getItem("finalscore"));
 
+
+//submit button that takes user input (initials).  adds those initals and the final score to a new object. pushes that object onto the highscores array and saves it to local storage. sorts the array of objects so they are in order of score. redirects to high scores page.
 submitBtnEl.addEventListener('click', function(){
     newHSName = saveNameEl.value;
     if (newHSName === '') {
@@ -18,7 +21,8 @@ submitBtnEl.addEventListener('click', function(){
         highscore['score'] = finalscore;
         highscores.push(highscore);
         highscores.sort(compareScore);
-        console.log(highscores);
+        // console.log(highscores);
+        //makes sure only keeps top 10 scores.
         if (highscores.length > 10) {
             highscores.splice(10, (highscores.length - 9));
         }
@@ -37,6 +41,7 @@ finalScoreEl.textContent = finalscore;
 
 window.localStorage.removeItem('finalscore');
 
+//sort function for sorting scores of the objects in the highscores array.
 function compareScore(a, b) {
     const scoreA = a.score;
     const scoreB = b.score;

@@ -97,4 +97,25 @@ let questions = [
         answer: '  Call it  ',
         unused: true
     }
+    ,
+    {
+        question: 'An object must have:',
+        choices: ['  A key and a value  ',  '  Something in it  ', '  A reference  ',  '  Declarations  '],
+        answer: '  A key and a value  ',
+        unused: true
+    }
+    ,
+    {
+        question: 'What method do you call to add an item to an Array?',
+        choices: ['  .add()  ',  '  .pop()  ',  '  .push()  ', '  .addToArray()  '],
+        answer: '  .push()  ',
+        unused: true
+    }
+    ,
+    {
+        question: 'How do you create a timer in javascript?',
+        choices: ['  createTimer()  ',  '  setTimer()  ', '  setinterval  ',  '  none of the above  '],
+        answer: '  none of the above  ',
+        unused: true
+    }
 ]

@@ -9,6 +9,8 @@ score = 0;
 
 const timerEl = document.createElement('div');
 
+
+//waits for page to loads then starts a 5 second timer.  Once the timer is over it starts the game.
 window.onload = function() {
     let countdown = window.setInterval(function() {
 
@@ -30,6 +32,8 @@ window.onload = function() {
  };
 
 
+
+ //starts a 60 second game timer, adds score to page, and if timer is done, calculates final score, saves to local storage, and swaps page to the endscreen.
  function startGame() {
     let gameTime = window.setInterval(function() {
         gameTimerEl.textContent = gameTimer;
@@ -42,10 +46,15 @@ window.onload = function() {
             window.location.href = 'endscreen.html';
         }
     }, 1000)
-    filteredQuestions = questions.filter(item => Object.values(item)[3]);
-    console.log(filteredQuestions);
-    correctAnswer = getNextQuestion(filteredQuestions);
 
+    //filters the questions array to drop any used questions (at this point will be none, but will allow functions to always use filteredQuestions), then gets the next question to start the game.  Also sets the time the question was started to the current gametime
+    filteredQuestions = questions.filter(item => Object.values(item)[3]);
+    // console.log(filteredQuestions);
+    correctAnswer = getNextQuestion(filteredQuestions);
+    startOfQuestionTimer = gameTimer;
+
+    
+    //buttons are made visible and event listeners are added to each one.  when clicked the will run the function to see if they are the correct answer
     btnsEl.style.visibility = 'visible';
 
     answer1El.addEventListener('click', function (){
@@ -66,6 +75,8 @@ window.onload = function() {
     });
  };
 
+
+ //run when a button is click or game starts to generate next question.  questions a pulled randomly from the filtered array, then info pulled from the obj passed in and assigned to the buttons.  array then filtered, and it returns whatever answer is correct
  function getNextQuestion(arrObj) {
      let randomQuestion = Math.floor((Math.random() * filteredQuestions.length));
      let questionObj = arrObj[randomQuestion];
@@ -84,17 +95,18 @@ window.onload = function() {
      answer4El.textContent = answer4;
      currentQuestion ++;    
      filteredQuestions = questions.filter(item => Object.values(item)[3]);
-    console.log(filteredQuestions);
+    // console.log(filteredQuestions);
 
      return correctAnswer;
  };
 
+ //function is passed the correct answer and the answer of the button that is clicked.  calculates the time the user took to answer (with a cathch if it is 0 then make it 1 so it wont divide by 0 later).  if the passed answer is the same as the one they clicked, it will give them a score, display correct on the screen, then get the next question and save when (based on gametimer) the question was started.  If there are no more questions, it will instead calculate final score, store that, and direct to endscreen.  Same happens for if they get it wrong, only no score is added and time is subtracted.
  function checkIfCorrect(answer, clicked) {
-    console.log(correctAnswer);
+    // console.log(correctAnswer);
     answeredTimer = gameTimer;
-    console.log(answeredTimer);
+    // console.log(answeredTimer);
     let timeToAnswer = startOfQuestionTimer - answeredTimer;
-    console.log(timeToAnswer);
+    // console.log(timeToAnswer);
     if (timeToAnswer === 0) {
         timeToAnswer = 1;
     };
@@ -121,10 +133,7 @@ window.onload = function() {
             savedFinalScore = window.localStorage.setItem("finalscore", JSON.stringify(finalScore));  
          }
          correctAnswer = getNextQuestion(filteredQuestions);
+         startOfQuestionTimer = gameTimer;
         //  listeners(correctAnswer);
      }
  };
-
-function filterArray(arr) {
-    arr.unused
-}
